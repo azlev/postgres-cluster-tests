@@ -1,0 +1,79 @@
+version: "3.7"
+
+services:
+  master:
+    container_name: "master"
+    image: "postgres:11.8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./data/master:/var/lib/postgresql/data"
+      - "./master:/docker-entrypoint-initdb.d"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_HOST_AUTH_METHOD: "md5"
+      PG_REP_USER: "repl_user"
+      PG_REP_PASSWORD: "123456"
+    networks:
+      default:
+        aliases:
+          - pg_cluster
+
+  ro1:
+    container_name: "ro1"
+    image: "postgres:11.8"
+    ports:
+      - '5433:5432'
+    depends_on:
+      - master
+    volumes:
+      - "./data/ro1:/var/lib/postgresql/data"
+      - "./standby:/docker-entrypoint-initdb.d"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      PG_REP_USER: "repl_user"
+      PG_REP_PASSWORD: "123456"
+    networks:
+      default:
+        aliases:
+          - pg_cluster
+  ro2:
+    container_name: "ro2"
+    image: "postgres:11.8"
+    ports:
+      - '5434:5432'
+    depends_on:
+      - master
+    volumes:
+      - "./data/ro2:/var/lib/postgresql/data"
+      - "./standby:/docker-entrypoint-initdb.d"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      PG_REP_USER: "repl_user"
+      PG_REP_PASSWORD: "123456"
+    networks:
+      default:
+        aliases:
+          - pg_cluster
+  ro3:
+    container_name: "ro3"
+    image: "postgres:11.8"
+    ports:
+      - '5435:5432'
+    depends_on:
+      - master
+    volumes:
+      - "./data/ro3:/var/lib/postgresql/data"
+      - "./standby:/docker-entrypoint-initdb.d"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      PG_REP_USER: "repl_user"
+      PG_REP_PASSWORD: "123456"
+    networks:
+      default:
+        aliases:
+          - pg_cluster
