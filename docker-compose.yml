@@ -15,10 +15,6 @@ services:
       POSTGRES_HOST_AUTH_METHOD: "md5"
       PG_REP_USER: "repl_user"
       PG_REP_PASSWORD: "123456"
-    networks:
-      default:
-        aliases:
-          - pg_cluster
 
   ro1:
     container_name: "ro1"
@@ -35,10 +31,7 @@ services:
       POSTGRES_PASSWORD: "postgres"
       PG_REP_USER: "repl_user"
       PG_REP_PASSWORD: "123456"
-    networks:
-      default:
-        aliases:
-          - pg_cluster
+
   ro2:
     container_name: "ro2"
     image: "postgres:11.8"
@@ -54,10 +47,7 @@ services:
       POSTGRES_PASSWORD: "postgres"
       PG_REP_USER: "repl_user"
       PG_REP_PASSWORD: "123456"
-    networks:
-      default:
-        aliases:
-          - pg_cluster
+
   ro3:
     container_name: "ro3"
     image: "postgres:11.8"
@@ -73,7 +63,4 @@ services:
       POSTGRES_PASSWORD: "postgres"
       PG_REP_USER: "repl_user"
       PG_REP_PASSWORD: "123456"
-    networks:
-      default:
-        aliases:
-          - pg_cluster
+
