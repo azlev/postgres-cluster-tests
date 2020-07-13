@@ -38,7 +38,7 @@ first:
 ```
 export PGPASSWORD=postgres
 psql -U postgres -h 127.0.0.1 -c "CREATE TABLE test(id serial);"
-while :; do psql -U postgres -h 127.0.0.1 -c "BEGIN; INSERT INTO test VALUE (DEFAULT); COMMIT;"; sleep 2; done
+while :; do psql -U postgres -h 127.0.0.1 -c "BEGIN; INSERT INTO test VALUES (DEFAULT); COMMIT;"; sleep 2; done
 ```
 
 second:
